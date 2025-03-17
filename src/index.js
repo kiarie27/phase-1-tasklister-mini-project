@@ -1,25 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
-  const form = document.getElementById('create-task-form');
-  const taskInput = document.getElementById('new-task-description');
-  const taskList = document.getElementById('tasks');
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+    const form = document.getElementById("create-task-form");
+    const taskList = document.getElementById("tasks");
 
-    // Get the task description from the input field.
-    const taskText = taskInput.value;
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents page from refreshing
 
-    // Only add a task if the text is not empty.
-    if (taskText.trim() !== '') {
-      const listItem = document.createElement('li');
-      listItem.textContent = taskText;
+      const inputField = document.getElementById("new-task-description");
+      const taskText = inputField.value.trim();
 
-      // Append the new task to the task list.
-      taskList.appendChild(listItem);
+      if (taskText !== "") {
+        const listItem = document.createElement("li");
+        listItem.textContent = taskText;
+  //delete butoon
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "delete";
+        deleteButton.addEventListener("click", () => listItem.remove());
 
-      // Clear the input field after adding the task.
-      taskInput.value = '';
-    }
+        listItem.appendChild(deleteButton);
+        taskList.appendChild(listItem);
+      }
+
+      inputField.value = "";
   });
-});
+})
